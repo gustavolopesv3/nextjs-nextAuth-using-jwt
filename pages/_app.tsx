@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import React from 'react';
+import { SessionProvider } from 'next-auth/react';
+import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+// Use the <Provider> to improve performance and allow components that call
+// `useSession()` anywhere in your application to access the `session` object.
+const App = ({ Component, pageProps }: AppProps) => (
+  <SessionProvider session={pageProps.session}>
+    <Component {...pageProps} />
+  </SessionProvider>
+);
 
-export default MyApp
+export default App;
